@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Zombie</string>
+    <string name="accessibility_service_label">向僵尸开炮</string>
+    <string name="accessibility_service_description">向僵尸开炮</string>
 </resources>
