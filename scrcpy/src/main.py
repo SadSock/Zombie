@@ -27,6 +27,8 @@ logging.basicConfig(
 
 #logging.basicConfig(level=logging.NOTSET, stream=sys.stdout)
 
+last_time = time.time()
+last_cnt = 0
 # 定义路径
 path = '../images'
 
@@ -178,11 +180,18 @@ while True:
 
 
     #保存图片
-    if(frame_cnt % 100 == 0):
-        cv2.imwrite("../images/"+str(frame_cnt / 1000  % 1000 )+".bmp", frame_scale)
-        loginfo = "保存 " + "../images/"  + str(frame_cnt / 1000  % 1000 )+".bmp"
+    if(frame_cnt % 1000 == 0):
+        cv2.imwrite("../images/"+str(frame_cnt // 1000  % 1000 )+".bmp", frame_scale)
+        loginfo = "保存 " + "../images/"  + str(frame_cnt // 1000  % 1000 )+".bmp"
         logging.info(loginfo)
 
+    # 计算帧率
+    current_time = time.time()
+    if current_time - last_time >= 5:
+        loginfo = "帧率: " + str((frame_cnt - last_cnt) // 5 )
+        logging.info(loginfo)
+        last_cnt = frame_cnt
+        last_time = current_time
 
     if(frame_cnt == 1):
         # 保存上一帧的片段，用来检测图像是否发生变化
@@ -333,7 +342,6 @@ while True:
             click_num = 1
             for i in range(click_num):
                 subprocess.run(rob_rescue_command, shell=True)
-
 
 
     #cv2.imshow('zombie', frame_scale)
