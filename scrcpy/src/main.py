@@ -298,7 +298,7 @@ while True:
         status="战斗中"
 
     if(status=="战斗中"):
-        if(skill_cnt >= 10):
+        if(skill_cnt >= 21):
             time.sleep(1.0)
             暂停_command = "adb shell input tap " + str(pos_暂停[0] * scale_ratio) + " " + str(pos_暂停[1] * scale_ratio)
             subprocess.run(暂停_command , shell=True)
